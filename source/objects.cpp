@@ -577,9 +577,9 @@ void initialization(void) {
 
     // 新增武器
     // 武器名稱、攻擊力、防禦力、爆擊率、迴避率、技能觸發率、技能
-    weapon_list.push_back(Weapon("短劍", 10, 0, 20, 20, 0, skill_list[0]));
+    weapon_list.push_back(Weapon("短劍", 10, 0, 20, 10, 0, skill_list[0]));
     weapon_list.push_back(Weapon("長劍", 10, 5, 0, 0, 0, skill_list[0]));
-    weapon_list.push_back(Weapon("風魔小太刀", 10, 0, 20, 5, 5, skill_list[1]));
+    weapon_list.push_back(Weapon("風魔小太刀", 10, 0, 10, 5, 5, skill_list[1]));
     weapon_list.push_back(Weapon("飲血劍", 10, 10, 5, 5, 25, skill_list[2]));
     weapon_list.push_back(Weapon("浪速不知火", 20, 0, 0, 10, 25, skill_list[3]));
     weapon_list.push_back(Weapon("雷電國崩", 30, 5, 10, 0, 25, skill_list[4]));
