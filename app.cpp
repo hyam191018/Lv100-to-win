@@ -5,39 +5,35 @@
 
 bool do_sth(Player& player) {
     cout << "\n現在要幹嘛? "
-         << "(1) 查看角色訊息 "
-         << "(2) 查看角色屬性 "
-         << "(3) 查看裝備武器 "
-         << "(4) 提升屬性 "
-         << "(5) 轉蛋(抽取武器) "
-         << "(6) 休息(恢復體力) "
-         << "(7) 結束" << endl;
+         << "(1) 查看角色狀態 "
+         << "(2) 提升角色屬性 "
+         << "(3) 查看可用武器 "
+         << "(4) 轉蛋(抽取武器) "
+         << "(5) 休息(恢復體力) "
+         << "(6) 結束" << endl;
 
     u16 action = safe_action();
 
     switch (action) {
     case A:
         player.show_char();
-        break;
-    case B:
         player.show_attr();
         break;
-    case C:
-        player.show_weapon();
-        break;
-    case D:
+    case B:
         player.use_attr_poing();
         break;
-    case E:
+    case C:
+        break;
+    case D:
         player.gachapon();
         break;
-    case F:
+    case E:
         player.inn();
         break;
     case 666:
         player.cheat();
         break;
-    case G:
+    case F:
         return false;
         break;
     default:
@@ -47,9 +43,8 @@ bool do_sth(Player& player) {
 }
 
 int main(void) {
-    init_random();
+    initialization();
     Player player;
-
     while (do_sth(player))
         ;
 }

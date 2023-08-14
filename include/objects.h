@@ -5,7 +5,32 @@
 
 typedef enum { STR, DEX, LUK, MAX_HP, HP, ATK, DEF, CRIT, DODGE } ATTR;
 
-typedef enum { N, A, B, C, D, E, F, G, H, I, J, K } ACTIONS;
+typedef enum { Z, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O } ACTIONS;
+
+class Skill {
+  private:
+    string name; // 技能名稱
+    string desc; // 技能描述
+  public:
+    Skill(string name, string desc);
+    void show_skill(void);
+};
+
+class Weapon {
+  private:
+    string name; // 武器名稱
+    u16 atk;
+    u16 def;
+    u16 crit;
+    u16 dodge;
+    Skill skill;
+
+  public:
+    Weapon(string name, u16 atk, u16 def, u16 crit, u16 dodge, Skill skill);
+    string get_name(void);
+    void show_weapon_attr(void);
+    void get_skill_desc(void);
+};
 
 class Attribute {
   private:
@@ -34,21 +59,22 @@ class Character : public Attribute {
     u16 gold;        // 金幣
     u16 attr_point;  // 可用屬性點數
     Attribute attr;  // 屬性值
+    u16 weapon;      // 裝備武器
     void level_up(); // 角色升等
   protected:
     void set_exp(u16);  // 增加經驗值
     bool set_gold(s16); // 取得(失去)金幣:成功回傳true
     bool set_hp(s16); // 增加(減少)生命值:成功回傳true:失敗代表角色陣亡
-    string get_name(void);
-    u16 get_level(void);
-    u16 get_max_hp(void);
-    u16 get_hp(void);
-    u16 get_gold(void);
+    string get_name(void) { return name; }
+    u16 get_level(void) { return level; }
+    u16 get_max_hp(void) { return max_hp; }
+    u16 get_hp(void) { return hp; }
+    u16 get_gold(void) { return gold; }
 
   public:
     Character(void);
     void show_char(void);      // 查看角色狀態
-    void show_weapon(void);    // 查看裝備武器 todo
+    void show_weapons(void);   // 查看可用武器
     void use_attr_poing(void); // 提升屬性值
 };
 
@@ -61,5 +87,7 @@ class Player : public Character {
     void gachapon(void);
     void cheat(void);
 };
+
+void initialization();
 
 #endif

@@ -3,6 +3,34 @@
 #include "../include/msg.h"
 #include "../include/rand.h"
 
+vector<Skill> skill_list;
+vector<Weapon> weapon_list;
+
+Skill::Skill(string name, string desc) {
+    this->name = name;
+    this->desc = desc;
+}
+
+void Skill::show_skill(void) {
+    cout << "技能名稱:" << name << endl << "技能描述:" << desc << endl;
+}
+
+Weapon::Weapon(string name, u16 atk, u16 def, u16 crit, u16 dodge, Skill skill)
+    : name(name), atk(atk), def(def), crit(crit), dodge(dodge), skill(skill) {}
+
+string Weapon::get_name(void) { return name; }
+
+void Weapon::get_skill_desc(void) { skill.show_skill(); };
+
+void Weapon::show_weapon_attr(void) {
+    cout << "武器名稱:" << name << endl
+         << "提升攻擊力:" << atk << endl
+         << "提升防禦力:" << def << endl
+         << "提升爆擊率:" << crit << endl
+         << "提升迴避率:" << dodge << endl;
+    skill.show_skill();
+}
+
 Attribute::Attribute(void) {
     str = random(2, 5);
     dex = random(2, 5);
@@ -62,7 +90,7 @@ Character::Character(void) {
     cout << "請輸入角色名稱:";
     cin >> name;
     level = 1;
-    gold = attr_point = exp = 0;
+    gold = attr_point = exp = weapon = 0;
     hp = max_hp = 50;
     max_exp = 100;
 }
@@ -75,6 +103,8 @@ void Character::show_char(void) {
     cout << "經驗值:" << exp << "/100" << endl;
     cout << "金幣:" << gold << endl;
     cout << "可用屬性點數:" << attr_point << endl;
+    cout << "使用武器:" << weapon_list[weapon].get_name() << endl;
+    weapon_list[weapon].get_skill_desc();
 }
 
 void Character::level_up(void) {
@@ -161,17 +191,7 @@ void Character::use_attr_poing(void) {
     return;
 }
 
-void Character::show_weapon(void) { hard_msg("裝備武器"); }
-
-string Character::get_name(void) { return name; }
-
-u16 Character::get_level(void) { return level; }
-
-u16 Character::get_max_hp(void) { return max_hp; }
-
-u16 Character::get_hp(void) { return hp; }
-
-u16 Character::get_gold(void) { return gold; }
+void Character::show_weapons(void) { hard_msg("裝備武器"); }
 
 void Player::inn(void) {
     cout << "持有金幣" << get_gold() << "，是否要花費" << get_level() * 10
@@ -225,4 +245,19 @@ void Player::cheat(void) {
     default:
         break;
     }
+}
+
+void initialization(void) {
+    init_random();
+
+    // 新增技能
+    skill_list.push_back(Skill("無", "此武器無被動技能"));
+    skill_list.push_back(Skill("流血", "觸發後每回合隨機造成傷害"));
+    skill_list.push_back(Skill("燃燒", "造成5%最大生命值傷害"));
+
+    // 新增武器
+    weapon_list.push_back(Weapon("短劍", 5, 0, 5, 5, skill_list[0]));
+    weapon_list.push_back(Weapon("長劍", 20, 0, 0, 0, skill_list[0]));
+    weapon_list.push_back(Weapon("協差", 10, 0, 5, 5, skill_list[1]));
+    weapon_list.push_back(Weapon("烈火短刃", 10, 0, 5, 5, skill_list[2]));
 }
