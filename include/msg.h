@@ -23,4 +23,9 @@ void hard_msg(string msg);
  */
 void define_msg(string msg, char sign);
 
+/**
+ * 系統訊息
+ */
+void system_msg(string msg);
+
 #endif

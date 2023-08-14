@@ -3,39 +3,53 @@
 #include "include/objects.h"
 #include "include/rand.h"
 
-void do_sth(Character& character) {
-    cout << "\n現在要幹嘛?" << endl
-         << "(1) 查看角色訊息" << endl
-         << "(2) 查看角色屬性" << endl
-         << "(3) 提升等級" << endl
-         << "(4) 提升屬性" << endl
-         << "(5) 返回" << endl;
+bool do_sth(Player& player) {
+    cout << "\n現在要幹嘛? "
+         << "(1) 查看角色訊息 "
+         << "(2) 查看角色屬性 "
+         << "(3) 查看裝備武器 "
+         << "(4) 提升屬性 "
+         << "(5) 轉蛋(抽取武器) "
+         << "(6) 休息(恢復體力) "
+         << "(7) 結束" << endl;
+
     u16 action = safe_action();
 
     switch (action) {
     case A:
-        character.show_char();
+        player.show_char();
         break;
     case B:
-        character.show_attr();
+        player.show_attr();
         break;
     case C:
-        character.level_up();
+        player.show_weapon();
         break;
     case D:
-        character.use_attr_poing();
+        player.use_attr_poing();
         break;
-
+    case E:
+        player.gachapon();
+        break;
+    case F:
+        player.inn();
+        break;
+    case 666:
+        player.cheat();
+        break;
+    case G:
+        return false;
+        break;
     default:
         break;
     }
+    return true;
 }
 
 int main(void) {
     init_random();
-    Character character;
+    Player player;
 
-    while (1) {
-        do_sth(character);
-    }
+    while (do_sth(player))
+        ;
 }

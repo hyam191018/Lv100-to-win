@@ -5,7 +5,11 @@ u16 safe_action(void) {
     try {
         string input;
         cin >> input;
-        u16 action = stoi(input);
+        u32 action = stoi(input);
+        if (action > 10000) {
+            cout << "超出上限" << endl;
+            return 0;
+        }
         return action;
     } catch (const invalid_argument&) {
         return -1;
@@ -28,3 +32,5 @@ void define_msg(string msg, char sign) {
         cout << sign;
     cout << endl;
 }
+
+void system_msg(string msg) { cout << "系統訊息:" << msg << endl; }
