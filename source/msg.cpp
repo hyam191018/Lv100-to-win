@@ -7,7 +7,7 @@ u16 safe_action(void) {
         cin >> input;
         u32 action = stoi(input);
         if (action > 10000) {
-            cout << "¶W¥X¤W­­" << endl;
+            cout << "è¶…å‡ºä¸Šé™" << endl;
             return 0;
         }
         return action;
@@ -33,4 +33,4 @@ void define_msg(string msg, char sign) {
     cout << endl;
 }
 
-void system_msg(string msg) { cout << "¨t²Î°T®§:" << msg << endl; }
+void system_msg(string msg) { cout << "ç³»çµ±è¨Šæ¯:" << msg << endl; }
