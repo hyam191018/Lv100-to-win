@@ -54,4 +54,6 @@ int main(void) {
     Player player;
     while (do_sth(player))
         ;
+    string a;
+    cin >> a;
 }
