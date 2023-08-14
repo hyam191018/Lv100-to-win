@@ -318,6 +318,7 @@ bool Player::fight(void) {
             }
 
         } else if (myState == SLEEP) {
+            cout << get_name() << " 無法動彈!" << endl;
             myState = NORMAL;
             goto enemy;
         }
@@ -338,6 +339,7 @@ bool Player::fight(void) {
                     enemyState = BLOOD;
                 } else if (skill_name.compare("噬血") == 0) {
                     set_hp(get_atk());
+                    cout << get_name() << " 吸取了" << to_string(get_atk()) << "生命值" << endl;
                     if (get_hp() > get_max_hp()) {
                         set_hp(-(get_hp() - get_max_hp()));
                     }
@@ -397,6 +399,7 @@ bool Player::fight(void) {
             }
 
         } else if (enemyState == SLEEP) {
+            cout << mob.get_name() << " 無法動彈!" << endl;
             enemyState = NORMAL;
             goto me;
         }
@@ -417,6 +420,8 @@ bool Player::fight(void) {
                     myState = BLOOD;
                 } else if (skill_name.compare("噬血") == 0) {
                     mob.set_hp(mob.get_atk());
+                    cout << mob.get_name() << " 吸取了" << to_string(mob.get_atk()) << "生命值"
+                         << endl;
                     if (mob.get_hp() > mob.get_max_hp()) {
                         mob.set_hp(-(get_hp() - get_max_hp()));
                     }
