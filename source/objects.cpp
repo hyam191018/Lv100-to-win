@@ -253,6 +253,7 @@ void Mob::show_mob(void) {
          << "當前生命值:" << hp << endl
          << "最大生命值:" << max_hp << endl
          << "武器:" << weapon_list[weapon].get_name() << endl;
+    show_attr();
 }
 
 void Mob::set_level(u16 level) {
@@ -261,7 +262,7 @@ void Mob::set_level(u16 level) {
     this->max_hp = this->hp = level * 50;
     for (int i = 0; i < level; i++) {
         u16 state = condition(3);
-        up_attr(STR);
+        up_attr((ATTR)state);
     }
 }
 
@@ -310,7 +311,7 @@ bool Player::fight(void) {
     me:
         // 我方先攻
         if (myState == BLOOD) {
-            set_hp(-(get_max_hp() * 0.02));
+            set_hp(-(get_max_hp() * 0.05));
             if (get_hp() <= 0) {
                 win = false;
                 goto end;
@@ -360,8 +361,8 @@ bool Player::fight(void) {
                     cout << "，剩餘生命值:" << mob.get_hp() << endl;
                 }
             }
-            // 造成傷害
-            dmg = myWeapon.get_atk() + condition(myWeapon.get_atk());
+            // 造成傷害 隨機0.9~1.1倍傷害
+            dmg = this->get_atk() * random(90, 110) / 100;
             // 是否爆擊
             isCrit = simulateProbability(this->get_crit());
             if (isCrit) {
@@ -389,7 +390,7 @@ bool Player::fight(void) {
     enemy:
         // 敵方攻擊
         if (enemyState == BLOOD) {
-            mob.set_hp(-(mob.get_max_hp() * 0.02));
+            mob.set_hp(-(mob.get_max_hp() * 0.05));
             if (mob.get_hp() <= 0) {
                 win = true;
                 goto end;
@@ -439,7 +440,7 @@ bool Player::fight(void) {
                 }
             }
             // 造成傷害
-            dmg = enemyWeapon.get_atk() + condition(enemyWeapon.get_atk());
+            dmg = mob.get_atk() * random(90, 110) / 100;
             // 是否爆擊
             isCrit = simulateProbability(mob.get_crit());
             if (isCrit) {
@@ -567,7 +568,7 @@ void initialization(void) {
     // 新增技能
     // 技能名稱、被動技能
     skill_list.push_back(Skill("無", "此武器無被動技能"));
-    skill_list.push_back(Skill("流血", "每回合受到2%最大生命傷害"));
+    skill_list.push_back(Skill("流血", "每回合受到5%最大生命傷害"));
     skill_list.push_back(Skill("噬血", "回復自身攻擊力的生命"));
     skill_list.push_back(Skill("燃燒", "造成10%最大生命值傷害"));
     skill_list.push_back(Skill("麻痺", "一回合無法行動"));
@@ -579,7 +580,7 @@ void initialization(void) {
     // 武器名稱、攻擊力、防禦力、爆擊率、迴避率、技能觸發率、技能
     weapon_list.push_back(Weapon("短劍", 10, 0, 20, 10, 0, skill_list[0]));
     weapon_list.push_back(Weapon("長劍", 10, 5, 0, 0, 0, skill_list[0]));
-    weapon_list.push_back(Weapon("風魔小太刀", 10, 0, 10, 5, 5, skill_list[1]));
+    weapon_list.push_back(Weapon("風魔小太刀", 10, 0, 10, 5, 10, skill_list[1]));
     weapon_list.push_back(Weapon("飲血劍", 10, 10, 5, 5, 25, skill_list[2]));
     weapon_list.push_back(Weapon("浪速不知火", 20, 0, 0, 10, 25, skill_list[3]));
     weapon_list.push_back(Weapon("雷電國崩", 30, 5, 10, 0, 25, skill_list[4]));
