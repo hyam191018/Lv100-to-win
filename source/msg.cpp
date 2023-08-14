@@ -7,7 +7,7 @@ u16 safe_action(void) {
         cin >> input;
         u32 action = stoi(input);
         if (action > 10000) {
-            cout << "超出上限" << endl;
+            cout << "超出上限!" << endl;
             return 0;
         }
         return action;
