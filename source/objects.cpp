@@ -294,7 +294,7 @@ void Player::call_result(void) {
 
 bool Player::fight(void) {
     soft_msg("敵人出現");
-    u16 type = condition(get_level() > 10 ? 12 : mob_list.size());
+    u16 type = condition(mob_list.size());
     Mob mob = create_mob(type, get_level());
     bool win = true;
     soft_msg("開始戰鬥");
