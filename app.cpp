@@ -5,36 +5,42 @@
 
 bool do_sth(Player& player) {
     cout << "\n現在要幹嘛? "
-         << "(1) 查看角色狀態 "
-         << "(2) 提升角色屬性 "
-         << "(3) 更換武器 "
-         << "(4) 轉蛋(抽取武器) "
-         << "(5) 休息(恢復體力) "
-         << "(6) 結束" << endl;
+         << "(1) 戰鬥 "
+         << "(2) 查看角色狀態 "
+         << "(3) 提升角色屬性 "
+         << "(4) 更換武器 "
+         << "(5) 轉蛋(抽取武器) "
+         << "(6) 休息(恢復體力) "
+         << "(7) 結束" << endl;
 
     u16 action = safe_action();
 
     switch (action) {
     case A:
+        if (!player.fight()) {
+            return false;
+        }
+        break;
+    case B:
         player.show_char();
         player.show_attr();
         break;
-    case B:
+    case C:
         player.use_attr_poing();
         break;
-    case C:
+    case D:
         player.show_items();
         break;
-    case D:
+    case E:
         player.gachapon();
         break;
-    case E:
+    case F:
         player.inn();
         break;
     case 666:
         player.cheat();
         break;
-    case F:
+    case G:
         return false;
         break;
     default:
