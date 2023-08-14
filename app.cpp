@@ -7,7 +7,7 @@ bool do_sth(Player& player) {
     cout << "\n現在要幹嘛? "
          << "(1) 查看角色狀態 "
          << "(2) 提升角色屬性 "
-         << "(3) 查看可用武器 "
+         << "(3) 更換武器 "
          << "(4) 轉蛋(抽取武器) "
          << "(5) 休息(恢復體力) "
          << "(6) 結束" << endl;
@@ -23,6 +23,7 @@ bool do_sth(Player& player) {
         player.use_attr_poing();
         break;
     case C:
+        player.show_items();
         break;
     case D:
         player.gachapon();
