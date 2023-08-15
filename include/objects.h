@@ -133,6 +133,7 @@ class Player : public Character {
   public:
     Player(void) { fill(mob_type, mob_type + 100, 0); }
     bool fight(void);
+    bool loop(void);
     void inn(void);
     void gachapon(void);
     void call_result(void);

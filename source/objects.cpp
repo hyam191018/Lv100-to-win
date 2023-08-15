@@ -285,6 +285,7 @@ Mob create_mob(u16 type, u16 level) {
 
 void Player::call_result(void) {
     hard_msg("戰鬥結果");
+    cout << "達到等級:" << to_string(get_level()) << endl;
     for (int i = 0; i < 100; i++) {
         if (mob_type[i] != 0) {
             cout << "擊殺了 " << mob_list[i].get_name() << " " << mob_type[i] << "次!" << endl;
@@ -527,6 +528,17 @@ void Player::gachapon(void) {
     default:
         break;
     }
+}
+
+bool Player::loop(void) {
+    cout << "要進行幾次戰鬥? " << endl;
+    u16 round = safe_action();
+    for (u16 i = 0; i < round; i++) {
+        if (!fight()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Player::cheat(void) {

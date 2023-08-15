@@ -10,7 +10,7 @@ bool do_sth(Player& player) {
          << "(3) 提升角色屬性 "
          << "(4) 更換武器 "
          << "(5) 轉蛋(抽取武器) "
-         << "(6) 休息(恢復體力) "
+         << "(6) 掛機 "
          << "(7) 結束" << endl;
 
     u16 action = safe_action();
@@ -35,7 +35,9 @@ bool do_sth(Player& player) {
         player.gachapon();
         break;
     case F:
-        player.inn();
+        if (!player.loop()) {
+            return false;
+        }
         break;
     case 666:
         player.cheat();
