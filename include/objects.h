@@ -9,6 +9,8 @@ typedef enum { Z, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O } ACTIONS;
 
 typedef enum { NORMAL, BLOOD, SLEEP } STATES;
 
+#define NOOBS 5
+
 class Skill {
   private:
     string name; // §Þ¯à¦WºÙ
