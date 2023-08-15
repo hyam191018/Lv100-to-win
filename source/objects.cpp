@@ -442,34 +442,35 @@ bool Player::fight(void) {
                     cout << mob.get_name() << " 吸取了" << to_string(mob.get_atk()) << "生命值"
                          << endl;
                     if (mob.get_hp() > mob.get_max_hp()) {
-                        mob.set_hp(-(get_hp() - get_max_hp()));
+                        mob.set_hp(-(mob.get_hp() - mob.get_max_hp()));
                     }
                 } else if (skill_name.compare("輓歌") == 0) {
-                    set_hp(get_max_hp() / 2);
-                    cout << get_name() << " 恢復了" << to_string(get_max_hp() / 2) << "生命值"
-                         << endl;
-                    if (get_hp() > get_max_hp()) {
-                        set_hp(-(get_hp() - get_max_hp()));
-                    } else if (skill_name.compare("燃燒") == 0) {
-                        cout << get_name() << " 受到了"
-                             << to_string(static_cast<int>((get_max_hp() * 0.1))) << "點傷害";
-                        set_hp(-(get_max_hp() * 0.1));
-                        cout << "，剩餘生命值:" << get_hp() << endl;
-                    } else if (skill_name.compare("麻痺") == 0) {
-                        myState = SLEEP;
-                    } else if (skill_name.compare("冰凍") == 0) {
-                        myState = SLEEP;
-                    } else if (skill_name.compare("切割") == 0) {
-                        cout << get_name() << " 受到了" << to_string((get_hp() / 2)) << "點傷害";
-                        set_hp(-(get_hp() / 2));
-                        cout << "，剩餘生命值:" << get_hp() << endl;
-                    } else if (skill_name.compare("斬殺") == 0) {
-                        cout << get_name() << " 受到了" << to_string((get_hp())) << "點傷害";
-                        set_hp(-(get_hp()));
-                        cout << "，剩餘生命值:" << get_hp() << endl;
+                    mob.set_hp(mob.get_max_hp() / 2);
+                    cout << mob.get_name() << " 恢復了" << to_string(mob.get_max_hp() / 2)
+                         << "生命值" << endl;
+                    if (mob.get_hp() > mob.get_max_hp()) {
+                        mob.set_hp(-(mob.get_hp() - mob.get_max_hp()));
                     }
+                } else if (skill_name.compare("燃燒") == 0) {
+                    cout << get_name() << " 受到了"
+                         << to_string(static_cast<int>((get_max_hp() * 0.1))) << "點傷害";
+                    set_hp(-(get_max_hp() * 0.1));
+                    cout << "，剩餘生命值:" << get_hp() << endl;
+                } else if (skill_name.compare("麻痺") == 0) {
+                    myState = SLEEP;
+                } else if (skill_name.compare("冰凍") == 0) {
+                    myState = SLEEP;
+                } else if (skill_name.compare("切割") == 0) {
+                    cout << get_name() << " 受到了" << to_string((get_hp() / 2)) << "點傷害";
+                    set_hp(-(get_hp() / 2));
+                    cout << "，剩餘生命值:" << get_hp() << endl;
+                } else if (skill_name.compare("斬殺") == 0) {
+                    cout << get_name() << " 受到了" << to_string((get_hp())) << "點傷害";
+                    set_hp(-(get_hp()));
+                    cout << "，剩餘生命值:" << get_hp() << endl;
                 }
             }
+
             // 造成傷害
             dmg = mob.get_atk() * random(90, 110) / 100;
             // 是否爆擊
@@ -486,7 +487,6 @@ bool Player::fight(void) {
                 cout << get_name() << " 受到了" << to_string((dmg - get_def())) << "點傷害"
                      << "，剩餘生命值:" << get_hp() << endl;
             }
-
         } else {
             // 真傷
             if (enemyWeapon.get_skill().compare("神劍") == 0) {
@@ -624,7 +624,7 @@ void initialization(void) {
     skill_list.push_back(Skill("冰凍", "一回合無法行動"));
     skill_list.push_back(Skill("切割", "降低50%當前生命"));
     skill_list.push_back(Skill("忍殺", "直接擊殺對手"));
-    skill_list.push_back(Skill("輓歌", "恢復50%生命值"));
+    skill_list.push_back(Skill("輓歌", "恢復50%最大生命值"));
     skill_list.push_back(Skill("真傷", "此次攻擊無法迴避"));
 
     // 新增武器
@@ -637,8 +637,8 @@ void initialization(void) {
     weapon_list.push_back(Weapon("雷電國崩", 30, 5, 10, 0, 20, skill_list[4]));
     weapon_list.push_back(Weapon("極冰鬼切丸", 30, 5, 0, 10, 20, skill_list[5]));
     weapon_list.push_back(Weapon("村雨", 25, 0, 0, 0, 10, skill_list[6]));
-    weapon_list.push_back(Weapon("天叢雲", 25, 0, 0, 10, 5, skill_list[7]));
-    weapon_list.push_back(Weapon("不死斬", 40, 0, 50, 0, 0, skill_list[0]));
+    weapon_list.push_back(Weapon("不死斬", 25, 0, 0, 10, 5, skill_list[7]));
+    weapon_list.push_back(Weapon("天叢雲", 40, 0, 50, 0, 0, skill_list[0]));
     weapon_list.push_back(Weapon("招魂幡", 30, 20, 0, 10, 10, skill_list[8]));
     weapon_list.push_back(Weapon("神劍", 50, 10, 20, 0, 50, skill_list[9]));
 
@@ -658,8 +658,8 @@ void initialization(void) {
     mob_list.push_back(Mob("雷樣", 5));
     mob_list.push_back(Mob("寒", 6));
     mob_list.push_back(Mob("長綾", 7));
-    mob_list.push_back(Mob("劍心", 8));
+    mob_list.push_back(Mob("紫瞳", 8));
     mob_list.push_back(Mob("須左", 9));
     mob_list.push_back(Mob("縊鬼", 10));
-    mob_list.push_back(Mob("紫瞳", 11));
+    mob_list.push_back(Mob("劍心", 11));
 }
