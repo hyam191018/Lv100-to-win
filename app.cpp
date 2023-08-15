@@ -53,9 +53,13 @@ bool do_sth(Player& player) {
 
 int main(void) {
     initialization();
+restart:
     Player player;
     while (do_sth(player))
         ;
-    string a;
-    cin >> a;
+    cout << "輸入 (1) 重新開始 (2) 結束" << endl;
+    u16 action = safe_action();
+    if (action == 1) {
+        goto restart;
+    }
 }

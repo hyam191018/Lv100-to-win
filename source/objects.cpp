@@ -623,7 +623,7 @@ void initialization(void) {
     skill_list.push_back(Skill("麻痺", "一回合無法行動"));
     skill_list.push_back(Skill("冰凍", "一回合無法行動"));
     skill_list.push_back(Skill("切割", "降低50%當前生命"));
-    skill_list.push_back(Skill("斬殺", "直接擊殺對手"));
+    skill_list.push_back(Skill("忍殺", "直接擊殺對手"));
     skill_list.push_back(Skill("輓歌", "恢復50%生命值"));
     skill_list.push_back(Skill("真傷", "此次攻擊無法迴避"));
 
@@ -637,8 +637,8 @@ void initialization(void) {
     weapon_list.push_back(Weapon("雷電國崩", 30, 5, 10, 0, 20, skill_list[4]));
     weapon_list.push_back(Weapon("極冰鬼切丸", 30, 5, 0, 10, 20, skill_list[5]));
     weapon_list.push_back(Weapon("村雨", 25, 0, 0, 0, 10, skill_list[6]));
-    weapon_list.push_back(Weapon("三日月", 25, 0, 0, 10, 5, skill_list[7]));
-    weapon_list.push_back(Weapon("天叢雲", 40, 0, 50, 0, 0, skill_list[0]));
+    weapon_list.push_back(Weapon("天叢雲", 25, 0, 0, 10, 5, skill_list[7]));
+    weapon_list.push_back(Weapon("不死斬", 40, 0, 50, 0, 0, skill_list[0]));
     weapon_list.push_back(Weapon("招魂幡", 30, 20, 0, 10, 10, skill_list[8]));
     weapon_list.push_back(Weapon("神劍", 50, 10, 20, 0, 50, skill_list[9]));
 
