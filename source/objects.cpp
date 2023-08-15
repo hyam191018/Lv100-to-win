@@ -312,8 +312,9 @@ bool Player::fight(void) {
     me:
         // 我方先攻
         if (myState == BLOOD) {
-            set_hp(-(get_max_hp() * 0.05));
-            cout << get_name() << " 因流血損失了" << (get_max_hp() * 0.05) << "生命值" << endl;
+            set_hp(-static_cast<int>((get_max_hp() * 0.05)));
+            cout << get_name() << " 因流血損失了" << static_cast<int>((get_max_hp() * 0.05))
+                 << "生命值" << endl;
             if (get_hp() <= 0) {
                 win = false;
                 goto end;
@@ -408,7 +409,7 @@ bool Player::fight(void) {
     enemy:
         // 敵方攻擊
         if (enemyState == BLOOD) {
-            mob.set_hp(-(mob.get_max_hp() * 0.05));
+            mob.set_hp(-static_cast<int>((mob.get_max_hp() * 0.05)));
             cout << mob.get_name() << " 因流血損失了" << (mob.get_max_hp() * 0.05) << "生命值"
                  << endl;
             if (mob.get_hp() <= 0) {
