@@ -24,6 +24,3 @@ all: $(TARGET)
 
 $(TARGET): $(SRCS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
-
-clean:
-	rm -f $(TARGET)

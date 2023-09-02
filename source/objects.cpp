@@ -117,7 +117,6 @@ void Character::level_up(void) {
     define_msg("LEVEL UP", '#');
     level++;
     exp = 0;
-    max_exp;
     attr_point++;
     max_hp += 50;
     hp = max_hp;
