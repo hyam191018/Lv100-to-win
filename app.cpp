@@ -3,21 +3,24 @@
 #include "include/objects.h"
 #include "include/rand.h"
 
-bool do_sth(Player& player) {
-    cout << "\n²{¦b­n·F¹À? "
-         << "(1) ¾Ô°« "
-         << "(2) ¬d¬Ý¨¤¦âª¬ºA "
-         << "(3) ´£¤É¨¤¦âÄÝ©Ê "
-         << "(4) §ó´«ªZ¾¹ "
-         << "(5) Âà³J(©â¨úªZ¾¹) "
-         << "(6) ±¾¾÷ "
-         << "(7) µ²§ô" << endl;
+bool do_sth(Player &player)
+{
+    cout << "\nç¾åœ¨è¦å¹¹å˜›? "
+         << "(1) æˆ°é¬¥"
+         << "(2) è§’è‰²ç‹€æ…‹"
+         << "(3) æå‡å±¬æ€§"
+         << "(4) æ›´æ›æ­¦å™¨"
+         << "(5) æŠ½å–æ­¦å™¨"
+         << "(6) æŽ›æ©Ÿ"
+         << "(7) çµæŸ" << endl;
 
     u16 action = safe_action();
 
-    switch (action) {
+    switch (action)
+    {
     case A:
-        if (!player.fight()) {
+        if (!player.fight())
+        {
             return false;
         }
         break;
@@ -35,7 +38,8 @@ bool do_sth(Player& player) {
         player.gachapon();
         break;
     case F:
-        if (!player.loop()) {
+        if (!player.loop())
+        {
             return false;
         }
         break;
@@ -51,15 +55,17 @@ bool do_sth(Player& player) {
     return true;
 }
 
-int main(void) {
+int main(void)
+{
     initialization();
 restart:
     Player player;
     while (do_sth(player))
         ;
-    cout << "¿é¤J (1) ­«·s¶}©l (2) µ²§ô" << endl;
+    cout << "è¼¸å…¥ (1) é‡æ–°é–‹å§‹ (2) çµæŸ" << endl;
     u16 action = safe_action();
-    if (action == 1) {
+    if (action == 1)
+    {
         goto restart;
     }
 }
